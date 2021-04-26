@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
-import Pedidos from '../models/orders.model.js';
+import Orders from '../models/orders.model.js';
 
 export const orderController = {
     list: async (req,res) => {
-        let respuesta = await Pedidos.find();
+        let respuesta = await Orders.find();
         res.send(respuesta);
     },
     create: async (req,res) => {
-        let respuesta = await Pedidos.create({
+        let respuesta = await Orders.create({
             usuario_id:new mongoose.Types.ObjectId(req.body.usuario_id),
             pelicula_id:new mongoose.Types.ObjectId(req.body.pelicula_id),
             fechaAlquiler:JSON.stringify(Date.now()),

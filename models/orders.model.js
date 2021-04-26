@@ -2,13 +2,14 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-const PedidosSchema = new Schema ({
-    usuario_id: {type: Schema.Types.ObjectId, ref: "Usuarios"},
-    pelicula_id: {type: Schema.Types.ObjectId, ref: "Peliculas"},
-    fechaAlquiler: Date,
-    fechaDevolucion: Date
+const OrderSchema = new Schema ({
+    user_id: {type: Schema.Types.ObjectId, ref: "Users"},
+    movie_id: {type: Schema.Types.ObjectId, ref: "Movies"},
+    price: Number,
+    rent_date: Date,
+    devolution_date: Date
 });
 
-const Pedidos = mongoose.model('Pedidos',PedidosSchema);
+const Orders = mongoose.model('Orders',OrderSchema);
 
-export default Pedidos;
+export default Orders;

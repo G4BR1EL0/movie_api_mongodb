@@ -3,6 +3,6 @@ import { userController } from '../controllers/users.controller.js';
 
 const loginRoutes = Router();
 
-loginRoutes.get("/", userController.login);
+loginRoutes.post("/", userController.login);
 
 export default loginRoutes;
