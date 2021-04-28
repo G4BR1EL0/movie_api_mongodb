@@ -10,13 +10,17 @@ export const userController = {
     },
     login: async (req,res) => {
         try {
-            let respuesta = await Users.find({$and: [{'email':req.body.correo},
-                                                    {'password':req.body.password}]});
-            const payload={respuesta};
-            const secret=process.env.JWT_TOKEN;
-            const token=jwt.sign(payload,secret);
-    
-            res.json({token});
+            console.log(req.body)
+            let respuesta = await Users.findOne({$and: [{'email':req.body.email},
+                                                    {'password':req.body.password}]}).lean();
+            if(respuesta){
+                const payload={respuesta};
+                const secret=process.env.JWT_TOKEN;
+                const token=jwt.sign(payload,secret);        
+                res.json({token});
+                return 
+            }
+            res.json({error:"Datos incorrectos"});
         } catch (error) {
             console.log(error);            
             res.send(error);
@@ -24,14 +28,13 @@ export const userController = {
     },
     create: async (req,res) => {
         try {
+            console.log(req.body)
             let respuesta = await Users.create(req.body);
-            const payload={respuesta};
-            const secret=process.env.JWT_TOKEN;
-            const token=jwt.sign(payload,secret);
     
-            res.json({token});
+            res.json({respuesta});
         } catch (error) {
-            res.send(error);
+            res.json({error});
+            console.log(error);
         }
     },
     delete: async (req,res) => {
