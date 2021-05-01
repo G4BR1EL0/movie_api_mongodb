@@ -5,8 +5,9 @@ dotenv.config();
 
 export const userController = {
     list: async (req,res) => {
-        let respuesta = await Users.findById(req.params.id).lean();
-        res.send(respuesta);
+        const user = jwt.decode(req.headers.token);
+        let respuesta = await Users.findById(user.respuesta._id).lean();
+        res.json({respuesta});
     },
     login: async (req,res) => {
         try {
