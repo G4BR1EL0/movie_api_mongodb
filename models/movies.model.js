@@ -15,6 +15,6 @@ const MoviesSchema = new Schema ({
     video: String
 });
 
-const Movies = mongoose.model('movies', MoviesSchema);
+const Movies = mongoose.model('Movies', MoviesSchema);
 
 export default Movies;
